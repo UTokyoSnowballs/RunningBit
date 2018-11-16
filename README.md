@@ -1,4 +1,4 @@
-# RunningBit (https://runningbit.azurewebsites.net)
+# RunningBit
 Credit to Tinghao Li, Zilu Liang
 
 This app was developed based on SleepBeta (https://sleepbeta.azurewebsites.net) for a capstone project in the course "Web Development in Cloud" (https://snowballsutokyo.wordpress.com). 
