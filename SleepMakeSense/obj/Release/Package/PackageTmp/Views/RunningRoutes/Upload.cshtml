@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<SleepMakeSense.Models.RunningRoute>
+
+@{ 
+    ViewBag.Title = "Upload";
+}
+
+<style>
+    table tr td {
+        padding: 0 20px;
+    }
+</style>
+@*
+<table>
+    <tr>
+        <th>TotalTimeSeconds</th>
+        <th>TotalDistanceMeters</th>
+    </tr>
+    @foreach (SleepMakeSense.Models.RunningRoute total in Model)
+    {
+        <tr>
+            <td>@total.TotalTimeSeconds</td>
+            <td>@total.TotalDistanceMeters</td>
+        </tr>
+    }
+
+</table>
+*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+
+        // This example creates a 2-pixel-wide red polyline showing the path of William
+        // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+        // Brisbane, Australia.
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 3,
+                center: new google.maps.LatLng(0, -180),//{lat: 0, lng: -180},
+                mapTypeId: 'terrain'
+            });
+
+            var marker = new google.maps.Marker({
+                position: { lat: 37.772, lng: -122.214 },
+                map: map
+            });
+
+
+            
+        var flightPlanCoordinates = [
+          {lat: 37.772, lng: -122.214},
+          {lat: 21.291, lng: -157.821},
+          {lat: -18.142, lng: 178.431},
+          {lat: -27.467, lng: 153.027}
+        ];
+     
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4WsZ1pN6sfAJ0fjebWmGbcKRtNbPAoGQ&callback=initMap">
+    </script>
+</body>
+
+
+<table>
+    <tr>
+        <th>TimeStamp</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Distance</th>
+        <th>HeartRateBpm</th>
+    </tr>
+    @foreach (SleepMakeSense.Models.RunningRoute records in Model)
+    {
+        <tr>
+            <td>@records.TimeStamp</td>
+            <td>@records.Latitude</td>
+            <td>@records.Longitude</td>
+            <td>@records.Distance</td>
+            <td>@records.HeartRateBpm</td>
+        </tr>
+    }
+</table>
+</html>

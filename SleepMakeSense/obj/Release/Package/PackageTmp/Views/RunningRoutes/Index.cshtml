@@ -1,0 +1,173 @@
+﻿@model IEnumerable<SleepMakeSense.Models.RunningRoute>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--Google Maps Javascript API example - Add Marker
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+          var uluru = { lat: 35.71489953994751, lng: 139.76060700416565 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4WsZ1pN6sfAJ0fjebWmGbcKRtNbPAoGQ&callback=initMap">
+    </script>
+</body>
+</html>
+
+ -->
+<!--Google Maps Javascript API - Simple Polylines-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a 2-pixel-wide red polyline showing the path of William
+      // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+      // Brisbane, Australia.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: 0, lng: -180},
+          mapTypeId: 'terrain'
+        });
+
+        var marker = new google.maps.Marker({
+            position: { lat: 37.772, lng: -122.214 },
+            map: map
+        });
+
+        var flightPlanCoordinates = [
+          {lat: 37.772, lng: -122.214},
+          {lat: 21.291, lng: -157.821},
+          {lat: -18.142, lng: 178.431},
+          {lat: -27.467, lng: 153.027}
+        ];
+        var flightPath = new google.maps.Polyline({
+          path: flightPlanCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4WsZ1pN6sfAJ0fjebWmGbcKRtNbPAoGQ&callback=initMap">
+    </script>
+</body>
+</html>
+
+<!--Function of uploading files-->
+<h2>Upload</h2>
+<hr />
+<form action="@Url.Action("Upload")" method="post" enctype="multipart/form-data">
+
+    <label for="file">Filename:</label>
+
+    <input type="file" name="file" id="file" />
+
+    <input type="submit" />
+
+    <table>
+        <tr>
+            <td colspan="2"></td>
+            @foreach (var item in Model)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalTimeSeconds)
+                </td>
+            }
+        </tr>
+
+    </table>
+
+</form>
+
+
+<!--Original parts-->
+@*
+<h3>Index</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+*@

@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Fitbit.Api.Portable.Models.ActivityLogsList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+    <p>Input your Activity log-id</p>
+    <br />
+
+    @using (Html.BeginForm("Index", "RunningRoutes"))
+    {
+        <input type="text" id="Logid" name="Logid" />
+    }
+
+    <br /><br />
+    <p>[How to obtain my logid?]</p>
+    <p>Go to the Activity Logs page in the Fitbit Web app. Click View Details 
+    button on the Activity History pane that contains GPS data. The activity 
+    log id will be in the URL, e.g. 213560689 in https://www.fitbit.com/activities/exercise/213560689 .</p>
+
+    <br />
+    <a href="https://www.fitbit.com/activities" style="color:aqua">Click here to go to the Activity Logs page!</a>
+</body>
+</html>
+
+

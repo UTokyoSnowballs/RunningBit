@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<students>
+  <student>
+    <LatitudeDegrees>Tarun</LatitudeDegrees>
+    <class_Section>
+      <new>18.234</new>
+    </class_Section>
+  <roll_no>1234</roll_no>
+  </student>
+<student>
+    <LatitudeDegrees>Ram</LatitudeDegrees>
+     <class_Section>
+      <new>134.75</new>
+    </class_Section>
+  <roll_no>1235</roll_no>
+  </student>
+<student>
+    <LatitudeDegrees>Rajeev</LatitudeDegrees>
+      <class_Section>
+      <new>395.67</new>
+    </class_Section>
+  <roll_no>1236</roll_no>
+  </student>
+<student>
+    <LatitudeDegrees>Gopal</LatitudeDegrees>
+    <class_Section>
+      <new>fdhhhhhhhhh</new>
+    </class_Section>
+  <roll_no>1237</roll_no>
+  </student>
+</students>

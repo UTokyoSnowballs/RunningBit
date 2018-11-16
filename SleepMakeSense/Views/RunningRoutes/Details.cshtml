@@ -1,0 +1,66 @@
+﻿@*@model SleepMakeSense.Models.RunningRoute*@
+
+@model IEnumerable<SleepMakeSense.Models.RunningRoute>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<table>
+    <tr>
+        <th>TimeStamp</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Distance</th>
+        <th>HeartRateBpm</th>
+        <th>Instantaneous Speed</th>
+    </tr>
+    @foreach (SleepMakeSense.Models.RunningRoute records in Model)
+    {
+        <tr>
+            <td>@records.TimeStamp</td>
+            <td>@records.Latitude</td>
+            <td>@records.Longitude</td>
+            <td>@records.Distance</td>
+            <td>@records.HeartRateBpm</td>
+            <td>@records.InstantaneousSpeed</td>
+        </tr>
+    }
+</table>
+
+
+
+@*
+<div>
+    <h4>RunningRoute</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+    </dl>
+</div>
+*@

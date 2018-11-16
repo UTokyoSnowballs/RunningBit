@@ -1,0 +1,245 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<SleepMakeSense.Models.RunningRoute>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<!--Google Maps Javascript API - Simple Polylines-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+
+        // This example creates a 2-pixel-wide red polyline showing the path of William
+        // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+        // Brisbane, Australia.
+        var points = @Html.Raw(ViewBag.Routes);
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: new google.maps.LatLng(points[0].lat, points[0].lng),//{lat: 0, lng: -180},
+                mapTypeId: 'terrain'
+            });
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(points[0].lat, points[0].lng),
+                map: map
+            });
+
+            for (i = 0; i < points.length; i++)
+            {
+                var runningroute=new Array();
+                for (i = 0; i < points.length; i++)
+                {
+                    runningroute.push(new google.maps.LatLng(points[i].lat,points[i].lng));
+                }
+
+
+
+                var flightPath = new google.maps.Polyline({
+                    path: runningroute,
+                    geodesic: true,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                flightPath.setMap(map);
+            }
+
+            @*
+            var runningroute=new Array();
+            for (i = 0; i < markers.length; i++)
+            {
+                runningroute.push(new google.maps.LatLng(markers[i].lat,markers[i].lng));
+            }
+
+            @*
+            var flightPlanCoordinates = [
+              {lat: 37.772, lng: -122.214},
+              {lat: 21.291, lng: -157.821},
+              {lat: -18.142, lng: 178.431},
+              {lat: -27.467, lng: 153.027}
+            ];
+
+            var flightPath = new google.maps.Polyline({
+                path: runningroute,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+            *@
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4WsZ1pN6sfAJ0fjebWmGbcKRtNbPAoGQ&callback=initMap">
+    </script>
+
+    @*
+    <p>@Html.ActionLink("View Detail", "Details", "RunningRoutes", new { }, new { @class = "btn btn-primary btn-lg" })</p>
+    *@
+
+    <br /><br />
+    <!--Display the general information-->
+    <p>@Html.Raw(ViewBag.Totalperformance)</p>
+    <br /><br />
+
+    <canvas id="lineChart" width="400" height="200"></canvas>
+    <script>
+        var ctx = document.getElementById("lineChart");
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [@Html.Raw(ViewBag.TS)],
+                xAxisID: 't',
+                //labels: ['0','1','2','3','4','5'],
+                datasets: [
+                    {
+                        label: "Speed",
+                        yAxisID: 'spd',
+                        borderColor: "rgba(255,0,0,1)",
+                        pointBackgroundColor: "rgba(255,0,0,1)",
+                        pointBorderColor: "#fff",
+                        data: [@Html.Raw(ViewBag.SPD)]
+                    },
+                    {
+                        label: "Heart Rate",
+                        yAxisID: 'hr',
+                        borderColor: "rgba(255,255,0,1)",
+                        pointBackgroundColor: "rgba(255,255,0,1)",
+                        pointBorderColor: "#fff",
+                        data: [@Html.Raw(ViewBag.HR)]
+                        //data: [450,450,450,450,450,450]
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Speed & Heart Rate',
+                    fontSize: 20,
+                    fontColor: '#fff'
+                },
+                scales: {
+                    yAxes: [{
+                        id: 'spd',
+                        type: 'linear',
+                        fontSize: 16,
+                        fontColor: '#0ff',
+                        position: 'left',
+                        gridLines: {
+                            color: '#0ff'
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Speed (m/s)',
+                            fontSize: 16,
+                            fontColor: '#f00'
+                        },
+                        ticks: {
+                            max: 10,
+                            min: -10,
+                            fontColor: '#fff'
+                        }
+                    }, {
+                        id: 'hr',
+                        type: 'linear',
+                        fontSize: 18,
+                        fontColor: '#fff',
+                        position: 'right',
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Heart Rate (bpm)',
+                            fontSize: 18,
+                            fontColor: '#ff0'
+                        },
+                        ticks: {
+                            fontColor: '#fff'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time (s)',
+                            fontSize: 18,
+                            fontColor: '#fff'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 25,
+                            fontColor: '#fff'
+                        }
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: '#fff'
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+
+<br /><br />
+
+    <table border="4">
+        <tr>
+            <th>TimeStamp </th>
+            <th>Latitude </th>
+            <th>Longitude </th>
+            <th>Altitude (m)</th>
+            <th>Distance (m)</th>
+            <th>Heart Rate (bpm)</th>
+            <th>Instantaneous Speed (m/s)</th>
+        </tr>
+        @foreach (SleepMakeSense.Models.RunningRoute records in Model)
+        {
+            <tr>
+                <td>@records.TimeStamp</td>
+                <td>@records.Latitude</td>
+                <td>@records.Longitude</td>
+                <td>@records.Altitude</td>
+                <td>@records.Distance</td>
+                <td>@records.HeartRateBpm</td>
+                <td>@records.InstantaneousSpeed</td>
+            </tr>
+        }
+    </table>
+
+    
