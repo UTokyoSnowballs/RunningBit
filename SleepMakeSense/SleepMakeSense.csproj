@@ -427,7 +427,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="ClassDiagram2.cd" />
+    <!--Content Include="ClassDiagram2.cd" /-->
     <None Include="Properties\PublishProfiles\DeepSleep - Web Deploy.pubxml" />
     <Content Include="obj\Debug\Fitbit.Portable.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Fitbit.Portable.dll" />
